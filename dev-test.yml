@@ -1,0 +1,15 @@
+- name: My playbook test
+  hosts: myserver
+  tasks:
+    - name: debug server name
+      debug: msg="Current server host is {{ inventory_hostname }}."
+    - name: debug server ip
+      debug: msg="Current server ip is {{ ansible_eth0.ipv4.address }}."
+    - name: debug the with_items usage
+      debug: msg="the item is '{{ item }}'."
+      with_items:
+        - item1
+        - item2
+    - name: debug the with_dict usage
+      debug: msg="the name is '{{ item.key }}', the value is '{{ item.value }}'."
+      with_dict: "{{ ansible_eth0.ipv4 }}"
