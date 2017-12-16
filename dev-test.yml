@@ -13,3 +13,12 @@
     - name: debug the with_dict usage
       debug: msg="the name is '{{ item.key }}', the value is '{{ item.value }}'."
       with_dict: "{{ ansible_eth0.ipv4 }}"
+    - name: stat usage
+      stat: path=/opt
+      register: st
+    - name: debug stat
+      debug: var=st
+    - name: assert usage
+      assert:
+        #        that: st.stat.isdir 
+        that: not not st.stat.isdir 
